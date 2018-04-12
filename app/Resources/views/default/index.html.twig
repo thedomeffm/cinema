@@ -1,0 +1,11 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <p>Hallo Phil'</p>
+    <ul>
+    {% for user in data %}
+        <li>{{ user.username }}</li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
