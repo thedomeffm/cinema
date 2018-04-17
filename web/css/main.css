@@ -11,3 +11,16 @@ padding: 20px 0;
 .main {
     margin-top: 65px;
 }
+
+.impressumContent p{
+    text-decoration: underline;
+}
+
+.impressumContent p:hover{
+    color: #33D;
+    cursor: pointer;
+}
+
+.modal-body p{
+    line-height: 5px;
+}
