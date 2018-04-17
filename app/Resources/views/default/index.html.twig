@@ -3,9 +3,10 @@
 {% block content %}
     <p>Hallo Phil'</p>
     <ul>
-    {% for user in data %}
+    {% for user in alleNutzer %}
         <li>{{ user.username }}</li>
+        <li>{{ user.email }}</li>
+        <li>{{ user.id }}</li>
     {% endfor %}
     </ul>
-
 {% endblock %}
