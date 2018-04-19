@@ -1,12 +1,16 @@
 {% extends 'layout.html.twig' %}
-{% block stylesheets %}
-    <link href="{{ asset('css/index.css') }}" type="text/css" rel="stylesheet">
-    {{ parent() }}
-{% endblock %}
 
 {% block content %}
     <div class="jumbotron">
         <h1 class="display-4">Cinema</h1>
         <p class="lead">My Text</p>
     </div>
+    <br>
+    <ul>
+    {% for user in alleNutzer %}
+        <li>{{ user.username }}</li>
+        <li>{{ user.email }}</li>
+        <li>{{ user.id }}</li>
+    {% endfor %}
+    </ul>
 {% endblock %}
