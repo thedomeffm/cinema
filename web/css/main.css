@@ -8,6 +8,10 @@ color: #fff;
 padding: 20px 0;
 }
 
+.white {
+    color: white;
+}
+
 .main {
     margin-top: 65px;
 }
