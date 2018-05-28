@@ -3,9 +3,10 @@ body {
 }
 
 footer {
-background-color: #6E6E6E;
-color: #fff;
-padding: 20px 0;
+    background-color: #6E6E6E;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: 50px;
 }
 
 .white {
@@ -33,4 +34,11 @@ padding: 20px 0;
 
 .fos-form {
     width: 100%;
+}
+
+.card {
+    min-height: 55px;
+    background-color: #9acfea;
+    padding: 15px;
+    color: #ffffff;
 }
