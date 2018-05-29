@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Hall</h1>
+    <div class="row">
+        <div class="col-xs-offset-9 col-xs-3">
+            <a class="btn btn-success btn-block" href="{{ path('hall_create') }}">+ Erstellen</a>
+        </div>
+    </div>
+
+    {% if halls is not empty %}
+
+        <ul class="list-group">
+            {% for hall in halls %}
+                <li class="list-group-item">{{ hall.name }}</li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <b>Keine Sääle eingetragen</b>
+    {% endif %}
+{% endblock %}
