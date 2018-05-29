@@ -1,3 +1,8 @@
 <footer class="footer container-fluid text-center">
-    Impressum | <a class="white" href="{{ path('fos_user_security_login') }}">Login</a>
+    Impressum |
+    {% if not app.user %}
+        <a class="white" href="{{ path('fos_user_security_login') }}">Login</a>
+    {% else %}
+        <a class="white" href="{{ path('fos_user_security_logout') }}">Logout</a>
+    {% endif %}
 </footer>

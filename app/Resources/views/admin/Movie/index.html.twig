@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Movies</h1>
+    <div class="row">
+        <div class="col-xs-offset-9 col-xs-3">
+            <a class="btn btn-success btn-block" href="{{ path('movie_create') }}">+ Erstellen</a>
+        </div>
+    </div>
+
+    {% if movies is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Beschreibung</th>
+                    <th>Altersfreigabe</th>
+                    <th>Laufzeit (min)</th>
+                    <th>3D</th>
+                    <th>Überlange</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for movie in movies %}
+                <tr>
+                    <td>{{ movie.name }}</td>
+                    <td>{{ movie.description }}</td>
+                    <td>{{ movie.ageRating }} J.</td>
+                    <td>{{ movie.duration }}</td>
+                    <td>{% if movie.is3d %}JA{% else %}Nein{% endif %}</td>
+                    <td>{% if movie.overtime %}JA{% else %}Nein{% endif %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <b>Keine Filme eingetragen</b>
+    {% endif %}
+{% endblock %}

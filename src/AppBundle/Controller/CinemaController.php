@@ -40,7 +40,7 @@ class CinemaController extends Controller
             $em->persist($cinema);
             $em->flush();
 
-            return $this->redirectToRoute('cinema_settings');
+            return $this->redirectToRoute('admin_index');
         }
 
         return $this->render('admin/Movie/create.html.twig', [

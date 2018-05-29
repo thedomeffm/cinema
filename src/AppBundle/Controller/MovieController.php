@@ -2,22 +2,50 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Movie;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class MovieController extends Controller
 {
-
-    public function indexAction($name)
+    /**
+     * @Route("/admin/movie/index", name="movie_index")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexAction()
     {
-        return $this->render('', array('name' => $name));
+        $movies = $this->getDoctrine()->getRepository('AppBundle:Movie')->findAll();
+
+        return $this->render('admin/Movie/index.html.twig', [
+            'movies' => $movies,
+        ]);
     }
 
-    public function create()
+    /**
+     * @Route("/admin/movie/create", name="movie_create")
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function create(Request $request)
     {
+        $movie = new Movie();
 
+        $form = $this->createForm('AppBundle\Form\MovieType', $movie);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($movie);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_index');
+        }
 
         return $this->render('admin/Movie/create.html.twig', [
-
+            'form' => $form->createView()
         ]);
     }
 }
