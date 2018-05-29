@@ -1,5 +1,82 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Index</h1>
+    <div class="container">
+        <h1 class="text-center">Aktuelles Programm</h1>
+    </div>
+    <div class="container">
+        {% for movie in movies %}
+            <div class="table-responsive">
+                <h2>{{ movie.name }}</h2>
+                <span>
+                    <strong>L&auml;nge: </strong>{{ movie.duration }} Min. &emsp;
+                    <strong>3D: </strong>{% if movie.is3d %} ja {% else %} nein {% endif %}&emsp;
+                    <strong>Altersfreigabe: </strong>{{ movie.ageRating }}
+                </span>
+                <table class="table indexTable">
+                    <thead>
+                        <th>{{ "now"|date('l') }}</th>
+                        <th>{{ "now"|date_modify("+1 day")|date('l') }}</th>
+                        <th>{{ "now"|date_modify("+2 day")|date('l') }}</th>
+                        <th>{{ "now"|date_modify("+3 day")|date('l') }}</th>
+                        <th>{{ "now"|date_modify("+4 day")|date('l') }}</th>
+                        <th>{{ "now"|date_modify("+5 day")|date('l') }}</th>
+                        <th>{{ "now"|date_modify("+6 day")|date('l') }}</th>
+                    </thead>
+                    <tbody>
+                        {% for arrayList in movie.cinemaShows %}
+                            <tr>
+                                <td>
+                                {% if date(arrayList.date)|date('l') == "now"|date('l') %}
+                                    {{ arrayList.date|date("H:i") }}
+                                {% endif %}
+                                </td>
+
+                                <td>
+                                {% if date(arrayList.date)|date('l') == "now"|date_modify("+1 day")|date('l') %}
+                                    {{ arrayList.date|date("H:i") }}
+                                {% endif %}
+                                </td>
+
+                                <td>
+                                {% if date(arrayList.date)|date('l') == "now"|date_modify("+2 day")|date('l') %}
+                                    {{ arrayList.date|date("H:i") }}
+                                {% endif %}
+                                </td>
+
+                                <td>
+                                {% if date(arrayList.date)|date('l') == "now"|date_modify("+3 day")|date('l') %}
+                                    {{ arrayList.date|date("H:i") }}
+                                {% endif %}
+                                </td>
+
+                                <td>
+                                {% if date(arrayList.date)|date('l') == "now"|date_modify("+4 day")|date('l') %}
+                                    {{ arrayList.date|date("H:i") }}
+                                {% endif %}
+                                </td>
+
+                                <td>
+                                {% if date(arrayList.date)|date('l') == "now"|date_modify("+5 day")|date('l') %}
+                                    {{ arrayList.date|date("H:i") }}
+                                {% endif %}
+                                </td>
+
+                                <td>
+                                {% if date(arrayList.date)|date('l') == "now"|date_modify("+6 day")|date('l') %}
+                                    {{ arrayList.date|date("H:i") }}
+                                {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <td colspan="7">{{ movie.description }}</td>
+                    </tfoot>
+                </table>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+
 {% endblock %}

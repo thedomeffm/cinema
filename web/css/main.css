@@ -36,6 +36,10 @@ footer {
     width: 100%;
 }
 
+.indexTable{
+    width: 100%;
+}
+
 .card {
     min-height: 55px;
     background-color: #9acfea;
