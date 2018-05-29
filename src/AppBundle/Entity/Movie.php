@@ -270,8 +270,9 @@ class Movie
     /**
      * @param mixed $cinemaShows
      */
-    public function setCinemaShows($cinemaShows)
+    public function setCinemaShows(CinemaShow $cinemaShow)
     {
-        $this->cinemaShows = $cinemaShows;
+        $this->cinemaShows->add($cinemaShow);
+        $cinemaShow->setMovie($this);
     }
 }
