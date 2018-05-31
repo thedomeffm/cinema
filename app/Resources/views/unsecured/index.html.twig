@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="text-center">Aktuelles Programm</h1>
+        <h1 class="text-center underline">Aktuelles Programm</h1>
     </div>
     <div class="container">
         {% for movie in movies %}
@@ -15,13 +15,15 @@
                 </span>
                 <table class="table indexTable">
                     <thead>
-                        <th>{{ "now"|date('l') }}</th>
-                        <th>{{ "now"|date_modify("+1 day")|date('l') }}</th>
-                        <th>{{ "now"|date_modify("+2 day")|date('l') }}</th>
-                        <th>{{ "now"|date_modify("+3 day")|date('l') }}</th>
-                        <th>{{ "now"|date_modify("+4 day")|date('l') }}</th>
-                        <th>{{ "now"|date_modify("+5 day")|date('l') }}</th>
-                        <th>{{ "now"|date_modify("+6 day")|date('l') }}</th>
+                        <tr>
+                            <th>{{ "now"|date('l') }}</th>
+                            <th>{{ "now"|date_modify("+1 day")|date('l') }}</th>
+                            <th>{{ "now"|date_modify("+2 day")|date('l') }}</th>
+                            <th>{{ "now"|date_modify("+3 day")|date('l') }}</th>
+                            <th>{{ "now"|date_modify("+4 day")|date('l') }}</th>
+                            <th>{{ "now"|date_modify("+5 day")|date('l') }}</th>
+                            <th>{{ "now"|date_modify("+6 day")|date('l') }}</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {% for arrayList in movie.cinemaShows %}
@@ -71,7 +73,9 @@
                         {% endfor %}
                     </tbody>
                     <tfoot>
-                    <td colspan="7">{{ movie.description }}</td>
+                        <tr>
+                            <td colspan="7">{{ movie.description }}</td>
+                        </tr>
                     </tfoot>
                 </table>
             </div>

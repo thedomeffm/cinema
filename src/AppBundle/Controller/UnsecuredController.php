@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Movie;
 use AppBundle\Entity\CinemaShow;
+use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Movie;
+use AppBundle\Entity\Person;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -14,10 +16,9 @@ class UnsecuredController extends Controller
      */
     public function indexAction()
     {
-        $movie = array_fill(0, 7, null);
+        $movie = array_fill(0, 2, null);
         $cm = new CinemaShow();
         $cm->setDate(new \DateTime());
-
         For($i = 0; $i < sizeof($movie); $i++)
         {
             $movie[$i] = new Movie();
@@ -44,11 +45,30 @@ class UnsecuredController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function contactAction()
+    public function contactAction(Request $request)
     {
-        // replace this example code with whatever you need
+        $message = $request->get("message");
+
+        $person = new Person();
+        $form = $this->createForm('AppBundle\Form\PersonType', $person);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($person);
+            $em->flush();
+
+            //Send Mail Message
+
+            return $this->redirectToRoute('contact', array(
+                "message" => $person->getFirstname(). " ". $person->getLastname(). " erfolgreich gespeichert.",
+            ));
+        }
+
         return $this->render('unsecured/contact.html.twig', [
-            //---
+            "form" => $form->createView(),
+            "message" => $message
         ]);
     }
 }

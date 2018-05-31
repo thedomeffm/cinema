@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Kinomaxx FFM</a>
+            <a class="navbar-brand" href="{{ path('homepage') }}">Kinomaxx FFM</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -17,8 +17,8 @@
 
                 {% if not app.user %}
                     <li><a href="#"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-                    <li class=""><a href=""><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></li>
+                    <li><a href="{{ path('homepage') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+                    <li class=""><a href="{{ path('contact') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></li>
                 {% else %}
                     <li><a href="{{ path('admin_index') }}">Admin Index</a></li>
 
