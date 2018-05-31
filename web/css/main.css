@@ -14,7 +14,7 @@ footer {
 }
 
 .main {
-    margin-top: 65px;
+    margin-top: 45px;
 }
 
 .fos {
@@ -45,4 +45,13 @@ footer {
     background-color: #9acfea;
     padding: 15px;
     color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.modal-body p{
+    line-height: 5px;
+}
+
+.underline{
+    text-decoration: underline;
 }
