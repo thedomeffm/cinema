@@ -2,6 +2,19 @@
 
 {% block body %}
     <div class="container main">
+        {% if block("crumbs") is defined %}
+            {% block crumbs %}
+            {% endblock %}
+        {% endif %}
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block content %}
         {% endblock %}
     </div>

@@ -1,27 +1,42 @@
 {% extends 'layout.html.twig' %}
 
+{% block crumbs %}
+    <ol class="breadcrumb">
+        <li class="active">Administration</li>
+    </ol>
+{% endblock %}
+
 {% block content %}
+
     <h1>Administration</h1>
     <div class="row">
-        <div class="col-xs-3">
-            <div class="card">
-                <a href="{{ path('cinema_settings') }}">Grundeinstellung</a>
-            </div>
+        <div class="col-md-3">
+            <a href="{{ path('cinema_settings') }}">
+                <div class="card">
+                    Grundeinstellung
+                </div>
+            </a>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
+            <a href="{{ path('hall_index') }}">
             <div class="card">
-                <a href="{{ path('hall_index') }}">Kinosaal</a>
+                Kinosaal
             </div>
+            </a>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
+            <a href="{{ path('movie_index') }}">
             <div class="card">
-                <a href="{{ path('movie_index') }}">Filme</a>
+                Filme
             </div>
+            </a>
         </div>
-        <div class="col-xs-3">
+        <div class="col-md-3">
+            <a href="{{ path('show_index') }}">
             <div class="card">
-                <a href="{{ path('show_index') }}">Vorstellungen</a>
+                Vorstellungen
             </div>
+            </a>
         </div>
     </div>
 

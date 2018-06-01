@@ -2,31 +2,31 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Kinomaxx FFM</a>
+            <a class="navbar-brand" href="{{ path('homepage') }}">Kinomaxx FFM</a>
         </div>
+
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-
-                {% if not app.user %}
-                    <li><a href="#"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-                    <li class=""><a href=""><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></li>
-                {% else %}
-                    <li><a href="{{ path('admin_index') }}">Admin Index</a></li>
-
-                    <!-- Logout -->
+                <li><a href="#"><span class="glyphicon glyphicon-film" aria-hidden="true"></span> Spielplan</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Anfahrt</a></li>
+                <li class=""><a href=""><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Kontakt</a></li>
+                {% if app.user %}
+                    <li><a href="{{ path('admin_index') }}">Admin</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
                 {% endif %}
 
             </ul>
         </div><!-- /.navbar-collapse -->
+
+
     </div><!-- /.container-fluid -->
 </nav>

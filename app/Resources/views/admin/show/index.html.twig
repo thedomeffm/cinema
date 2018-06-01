@@ -1,18 +1,22 @@
 {% extends 'layout.html.twig' %}
 
+{% block crumbs %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_index') }}">Administration</a></li>
+        <li class="active">Vorstellungen</li>
+    </ol>
+{% endblock %}
+
 {% block content %}
-    <h1>Show</h1>
-    <div class="row">
-        <div class="col-xs-offset-9 col-xs-3">
-            <a class="btn btn-success btn-block" href="{{ path('show_create') }}">+ Erstellen</a>
-        </div>
+    <div class="page-header">
+        <h1>Vorstellungen <small class="pull-right"><a class="btn btn-success btn-block" href="{{ path('show_create') }}">+ Erstellen</a></small></h1>
     </div>
 
     {% if shows is not empty %}
 
         <ul class="list-group">
             {% for show in shows %}
-                <li class="list-group-item">"{{ show.movie.name }}" in Saal: {{ show.hall.name }} am {{ show.date|date('d.m.Y') }}</li>
+                <li class="list-group-item">"{{ show.movie.name }}" am {{ show.date|date('d.m.Y') }}</li>
             {% endfor %}
         </ul>
 

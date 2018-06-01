@@ -3,14 +3,14 @@
 {% block crumbs %}
     <ol class="breadcrumb">
         <li><a href="{{ path('admin_index') }}">Administration</a></li>
-        <li><a href="{{ path('hall_index') }}">Säle</a></li>
+        <li><a href="{{ path('movie_index') }}">Filme</a></li>
         <li class="active">Erstellen</li>
     </ol>
 {% endblock %}
 
 {% block content %}
     <div class="page-header">
-        <h1>Saal erstellen<small class="pull-right"><a class="btn btn-default btn-block" href="{{ path('hall_index') }}">Abbrechen</a></small></h1>
+        <h1>Film erstellen<small class="pull-right"><a class="btn btn-default btn-block" href="{{ path('movie_index') }}">Abbrechen</a></small></h1>
     </div>
 
     {{ form_start(form) }}

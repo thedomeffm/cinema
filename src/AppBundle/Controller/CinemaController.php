@@ -40,10 +40,12 @@ class CinemaController extends Controller
             $em->persist($cinema);
             $em->flush();
 
+            $this->addFlash('success', 'Änderungen übernommen!');
+
             return $this->redirectToRoute('admin_index');
         }
 
-        return $this->render('admin/Movie/create.html.twig', [
+        return $this->render('admin/cinema/settings.html.twig', [
             'form' => $form->createView(),
         ]);
     }

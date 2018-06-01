@@ -41,6 +41,8 @@ class ShowController extends Controller
             $em->persist($show);
             $em->flush();
 
+            $this->addFlash('success', 'Vorstellung gepeichert!');
+
             return $this->redirectToRoute('admin_index');
         }
 

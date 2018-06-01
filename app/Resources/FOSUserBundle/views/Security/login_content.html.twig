@@ -3,7 +3,7 @@
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
-
+<div class="login-container">
 
 <form action="{{ path("fos_user_security_check") }}" method="post">
     {% if csrf_token %}
@@ -30,3 +30,4 @@
     </div>
 
 </form>
+</div>

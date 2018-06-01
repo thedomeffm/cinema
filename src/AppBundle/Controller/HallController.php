@@ -41,6 +41,8 @@ class HallController extends Controller
             $em->persist($hall);
             $em->flush();
 
+            $this->addFlash('success', 'Saal '. $hall->getName() .' gepeichert!');
+
             return $this->redirectToRoute('admin_index');
         }
 

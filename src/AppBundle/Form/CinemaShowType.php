@@ -20,15 +20,18 @@ class CinemaShowType extends AbstractType
         $builder
             ->add('date', DateTimeType::class, [
                 'years' => range(date('Y'), date('Y') + 5),
+                'months' => range(date('m'), date('m') + 2),
+                'label' => 'Vorstellungsdatum'
             ])
             ->add('movie', EntityType::class, [
                 'class' => Movie::class,
-                'choice_label' => 'name'
-
+                'choice_label' => 'name',
+                'label' => 'Film'
             ])
             ->add('hall', EntityType::class, [
                 'class' => Hall::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                'label' => 'Saal'
 
             ]);
     }

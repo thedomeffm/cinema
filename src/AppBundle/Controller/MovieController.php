@@ -18,7 +18,7 @@ class MovieController extends Controller
     {
         $movies = $this->getDoctrine()->getRepository('AppBundle:Movie')->findAll();
 
-        return $this->render('admin/Movie/index.html.twig', [
+        return $this->render('admin/movie/index.html.twig', [
             'movies' => $movies,
         ]);
     }
@@ -41,10 +41,12 @@ class MovieController extends Controller
             $em->persist($movie);
             $em->flush();
 
+            $this->addFlash('success', 'Film '. $movie->getName() .' gepeichert!');
+
             return $this->redirectToRoute('admin_index');
         }
 
-        return $this->render('admin/Movie/create.html.twig', [
+        return $this->render('admin/movie/create.html.twig', [
             'form' => $form->createView()
         ]);
     }

@@ -10,4 +10,41 @@ namespace AppBundle\Repository;
  */
 class MovieRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getWeeklyMovies()
+    {
+        $today = new \DateTime();
+        $thursday = new \DateTime();
+        $thursday->setTime(0,0);
+
+        /*
+         * if today is thursday, let the thursday = today
+         * if not then it should go to the last thursday
+         *
+         * The ...->modify('last Thursday'); choose last thursday, even if its thursday
+         * it will go 7 days back.
+         */
+        if ( $today->format('l') !== 'Thursday' ) {
+            $thursday->modify('last Thursday');
+        }
+
+        $wednesday = clone $thursday;
+        $wednesday->modify('+7 days');
+
+        $qb = $this->createQueryBuilder('movie')
+            ->innerJoin('movie.cinemaShows', 'shows');
+
+        $qb ->select('movie', 'shows')
+            ->where('shows.date > :thursday')
+            ->andWhere('shows.date < :wednesday')
+            ->setParameters([
+                'thursday' => $thursday->format('Y-m-d H:i:s'),
+                'wednesday' => $wednesday->format('Y-m-d H:i:s')
+            ])
+            ->orderBy('shows.date', 'ASC')
+        ;
+
+
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }
