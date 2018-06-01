@@ -23,6 +23,10 @@ footer {
     margin-top: 50px;
 }
 
+hr {
+    border-color: var(--black);
+}
+
 .white {
     color: var(--white);
 }

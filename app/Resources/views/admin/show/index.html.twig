@@ -16,7 +16,7 @@
 
         <ul class="list-group">
             {% for show in shows %}
-                <li class="list-group-item">"{{ show.movie.name }}" am {{ show.date|date('d.m.Y') }}</li>
+                <li class="list-group-item">"{{ show.movie.name }}" am {{ show.date|date('d.m.Y H:i') }}</li>
             {% endfor %}
         </ul>
 

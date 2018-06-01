@@ -13,8 +13,10 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
+        $movies = $this->getDoctrine()->getRepository('AppBundle:Movie')->getWeeklyMovies(true);
+
         return $this->render('admin/index.html.twig', [
-            //
+            'movies' => $movies,
         ]);
     }
 }

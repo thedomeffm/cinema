@@ -10,7 +10,11 @@ namespace AppBundle\Repository;
  */
 class MovieRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getWeeklyMovies()
+    /**
+     * @param bool $preview
+     * @return array
+     */
+    public function getWeeklyMovies($preview = false)
     {
         $today = new \DateTime();
         $thursday = new \DateTime();
@@ -30,6 +34,11 @@ class MovieRepository extends \Doctrine\ORM\EntityRepository
         $wednesday = clone $thursday;
         $wednesday->modify('+7 days');
 
+        if ($preview) {
+            $wednesday->modify('+7 days');
+            $thursday->modify('+7 days');
+        }
+
         $qb = $this->createQueryBuilder('movie')
             ->innerJoin('movie.cinemaShows', 'shows');
 
@@ -43,8 +52,8 @@ class MovieRepository extends \Doctrine\ORM\EntityRepository
             ->orderBy('shows.date', 'ASC')
         ;
 
-
-
         return $qb->getQuery()->getArrayResult();
     }
+
+
 }

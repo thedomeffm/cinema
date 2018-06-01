@@ -15,12 +15,44 @@ class UnsecuredController extends Controller
      */
     public function indexAction()
     {
-        $movies = $this->getDoctrine()->getRepository('AppBundle:Movie')->getWeeklyMovies();
+        $movieRepository = $this->getDoctrine()->getRepository('AppBundle:Movie');
+        $showRepository = $this->getDoctrine()->getRepository('AppBundle:CinemaShow');
 
-        /** @var Movie $movie */
-        foreach ($movies as $movie) {
-            if ($movie['cinemaShows'][0]) {
-            }
+        $movies = $movieRepository->getWeeklyMovies();
+
+        $today = new \DateTime();
+        $thursday = new \DateTime();
+        $thursday->setTime(0,0);
+
+        if ( $today->format('l') !== 'Thursday' ) {
+            $thursday->modify('last Thursday');
+        }
+
+        $friday = clone $thursday;
+        $saturday = clone $thursday;
+        $sunday = clone $thursday;
+        $monday = clone $thursday;
+        $tuesday = clone $thursday;
+        $wednesday = clone $thursday;
+
+        $friday->modify('+1 days');
+        $saturday->modify('+2 days');
+        $sunday->modify('+3 days');
+        $monday->modify('+4 days');
+        $tuesday->modify('+5 days');
+        $wednesday->modify('+6 days');
+
+        $count = count($movies);
+        for ($i = 0; $i < $count; $i++) {
+            $movies[$i]['cinemaShows'] = [];
+
+            $movies[$i]['cinemaShows']['donnerstag'] = $showRepository->getShowsByDate($movies[$i]['id'], $thursday);
+            $movies[$i]['cinemaShows']['freitag'] = $showRepository->getShowsByDate($movies[$i]['id'], $friday);
+            $movies[$i]['cinemaShows']['samstag'] = $showRepository->getShowsByDate($movies[$i]['id'], $saturday);
+            $movies[$i]['cinemaShows']['sonntag'] = $showRepository->getShowsByDate($movies[$i]['id'], $sunday);
+            $movies[$i]['cinemaShows']['montag'] = $showRepository->getShowsByDate($movies[$i]['id'], $monday);
+            $movies[$i]['cinemaShows']['dienstag'] = $showRepository->getShowsByDate($movies[$i]['id'], $tuesday);
+            $movies[$i]['cinemaShows']['mittwoch'] = $showRepository->getShowsByDate($movies[$i]['id'], $wednesday);
         }
 
         return $this->render('unsecured/index.html.twig', [

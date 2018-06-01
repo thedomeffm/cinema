@@ -13,6 +13,7 @@
         <h1>Vorstellung erstellen<small class="pull-right"><a class="btn btn-default btn-block" href="{{ path('show_index') }}">Abbrechen</a></small></h1>
     </div>
 
+    <div class="alert alert-warning" role="alert">Vorstellungen dürfen nicht um 00:00 Uhr stattfinden!</div>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button type="submit" class="btn btn-success pull-right">Speichern</button>

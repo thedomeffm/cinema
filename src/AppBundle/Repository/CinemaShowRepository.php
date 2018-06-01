@@ -10,4 +10,29 @@ namespace AppBundle\Repository;
  */
 class CinemaShowRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param $movie
+     * @param $date
+     * @return mixed
+     */
+    public function getShowsByDate($movie, $date) {
+
+        /** @var \DateTime $toDate */
+        $toDate = clone $date;
+        $toDate->modify('+1day');
+
+        $qb = $this->createQueryBuilder('cinema_show');
+
+        $qb ->where('cinema_show.date > :date')
+            ->andWhere('cinema_show.date < :toDate')
+            ->andWhere('cinema_show.movie = :movie')
+            ->setParameters([
+                'date' => $date,
+                'toDate' => $toDate,
+                'movie' => $movie
+            ])
+            ->orderBy('cinema_show.date', 'ASC');
+
+        return $qb->getQuery()->getArrayResult();
+    }
 }
