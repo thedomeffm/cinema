@@ -34,7 +34,9 @@ class MovieType extends AbstractType
             ->add('is3d')
             ->add('sneak')
         ;
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)

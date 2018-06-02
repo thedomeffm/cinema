@@ -119,4 +119,13 @@ hr {
 .navbar-default .navbar-nav > .active > a:focus {
     color: var(--black);
     background-color: #e7e7e7;
+    margin-bottom: 15px;
+}
+
+.modal-body p{
+    line-height: 5px;
+}
+
+.underline{
+    text-decoration: underline;
 }

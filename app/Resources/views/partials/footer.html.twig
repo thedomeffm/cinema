@@ -1,5 +1,6 @@
 <footer class="footer container-fluid text-center">
-    Impressum |
+    <a class="white" data-toggle="modal" data-target="#modalImpressum" href="">Impressum</a> |
+    <a class="white" href="{{ path('contact') }}">Kontakt</a> |
     {% if not app.user %}
         <a class="white" href="{{ path('fos_user_security_login') }}">Login</a>
     {% else %}
