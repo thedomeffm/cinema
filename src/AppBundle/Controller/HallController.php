@@ -50,4 +50,35 @@ class HallController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/admin/hall/remove", name="hall_remove")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function remove(Request $request)
+    {
+        $id = $request->query->get('id');
+
+        if(!is_numeric($id)){
+            throw $this->createNotFoundException('Expect an Integer-ID');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $hall = $em->getRepository('AppBundle:Hall')->findOneBy(array(
+            'id' => $id
+        ));
+
+        if($hall){
+            $em->remove($hall);
+            $em->flush();
+        }
+
+        $this->addFlash('success', 'Saal '.$hall->getName().' gelöscht!');
+
+        return $this->redirectToRoute('hall_index',array(
+
+        ));
+    }
 }

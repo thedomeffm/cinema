@@ -17,13 +17,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="{{ path('homepage') }}"><span class="glyphicon glyphicon-film" aria-hidden="true"></span> Spielplan</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Anfahrt</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Kontakt</a></li>
+                <li><a href="{{ path('approach') }}"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Anfahrt</a></li>
+                <li><a href="{{ path('contact') }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Kontakt</a></li>
                 {% if app.user %}
                     <li><a href="{{ path('admin_index') }}">Admin</a></li>
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if app.user %}
                     <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
                 {% endif %}
-
             </ul>
         </div><!-- /.navbar-collapse -->
 

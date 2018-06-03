@@ -10,6 +10,8 @@
 
     --white: #FFFFFF;
     --black: #4b4b4b;
+
+    --shadow-color: rgba(122, 122, 122, 0.71);
 }
 
 body {
@@ -77,7 +79,7 @@ hr {
 }
 
 .card:hover {
-    box-shadow: 5px 5px 10px rgba(122, 122, 122, 0.71);
+    box-shadow: 5px 5px 10px var(--shadow-color);
 }
 
 .breadcrumb {
@@ -122,10 +124,63 @@ hr {
     margin-bottom: 15px;
 }
 
-.modal-body p{
+.underline{
+    text-decoration: underline;
+}
+
+.list-style-type-none{
+    list-style-type: none;
+}
+
+.line-height-xs{
     line-height: 5px;
 }
 
-.underline{
-    text-decoration: underline;
+.p0{
+    padding: 0;
+}
+.p1{
+    padding: 10px;
+}
+
+.p2{
+    padding: 20px;
+}
+
+.m1{
+    margin: 10px;
+}
+
+.m0{
+    margin: 0;
+}
+
+.pull-none{
+    float: none;
+}
+
+.showTable{
+    width: 100%;
+}
+
+.showTable>li{
+    min-width: 14.2%;
+    font-weight: bold;
+}
+
+.showField{
+    min-width: 14.2%;
+}
+
+.fskImage{
+    width: 75px;
+    margin-top: 25px;
+}
+
+.shadow-hover:hover>div{
+    box-shadow: 1px 1px 15px var(--shadow-color);
+}
+
+.movieImage{
+    width: 150px;
 }

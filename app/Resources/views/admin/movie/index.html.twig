@@ -22,6 +22,7 @@
                     <th>Laufzeit (min)</th>
                     <th>3D</th>
                     <th>Überlange</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,7 @@
                     <td>{{ movie.duration }}</td>
                     <td>{% if movie.is3d %}JA{% else %}Nein{% endif %}</td>
                     <td>{% if movie.overtime %}JA{% else %}Nein{% endif %}</td>
+                    <td class=""><a href="{{ path('movie_remove', {'id': movie.id}) }}"><span class="glyphicon glyphicon glyphicon-remove"></span></a></td>
                 </tr>
             {% endfor %}
             </tbody>

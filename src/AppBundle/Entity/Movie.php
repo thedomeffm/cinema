@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Movie
@@ -70,6 +71,14 @@ class Movie
      * @ORM\Column(name="sneak", type="boolean")
      */
     private $sneak;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Bitte geben Sie eine Bildatei an.")
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $image;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\CinemaShow", mappedBy="movie")
@@ -262,13 +271,32 @@ class Movie
     /**
      * @return mixed
      */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed image
+     *
+     * return mixed
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this->image;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCinemaShows()
     {
         return $this->cinemaShows;
     }
 
     /**
-     * @param mixed $cinemaShows
+     * @param CinemaShow $cinemaShow
      */
     public function setCinemaShows(CinemaShow $cinemaShow)
     {

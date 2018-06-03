@@ -50,4 +50,35 @@ class ShowController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/admin/show/remove", name="show_remove")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function remove(Request $request)
+    {
+        $id = $request->query->get('id');
+
+        if(!is_numeric($id)){
+            throw $this->createNotFoundException('Expect an Integer-ID');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $show = $em->getRepository('AppBundle:CinemaShow')->findOneBy(array(
+            'id' => $id
+        ));
+
+        if($show){
+            $em->remove($show);
+            $em->flush();
+        }
+
+        $this->addFlash('success', 'Vorstellung gelöscht!');
+
+        return $this->redirectToRoute('show_index',array(
+
+        ));
+    }
 }

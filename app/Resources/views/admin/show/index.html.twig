@@ -13,12 +13,34 @@
     </div>
 
     {% if shows is not empty %}
+        {#
+            <ul class="list-group">
+                {% for show in shows %}
+                    <li class="list-group-item">"{{ show.movie.name }}" am {{ show.date|date('d.m.Y H:i') }}</li>
+                {% endfor %}
+            </ul>
+        #}
 
-        <ul class="list-group">
-            {% for show in shows %}
-                <li class="list-group-item">"{{ show.movie.name }}" am {{ show.date|date('d.m.Y H:i') }}</li>
-            {% endfor %}
-        </ul>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Saal</th>
+                    <th>Datum</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for show in shows %}
+                    <tr>
+                        <td>{{ show.movie.name }}</td>
+                        <td>{{ show.hall.name }}</td>
+                        <td>{{ show.date|date('d.m.Y H:i') }}</td>
+                        <td class=""><a href="{{ path('show_remove', {'id': show.id}) }}"><span class="glyphicon glyphicon glyphicon-remove"></span></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
     {% else %}
         <b>Keine Vorstellung eingetragen</b>

@@ -93,4 +93,16 @@ class UnsecuredController extends Controller
             "message" => $message
         ]);
     }
+
+    /**
+     * @Route("/approach", name="approach")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function approachAction()
+    {
+        return $this->render('unsecured/approach.html.twig', array(
+
+        ));
+    }
 }

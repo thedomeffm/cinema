@@ -13,12 +13,29 @@
     </div>
 
     {% if halls is not empty %}
+        {#
+            <ul class="list-group">
+                {% for hall in halls %}
+                    <li class="list-group-item">{{ hall.name }}</li>
+                {% endfor %}
+            </ul>
+        #}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hall in halls %}
+                    <tr>
+                        <td>{{ hall.name }}</td>
+                        <td class=""><a href="{{ path('hall_remove', {'id': hall.id}) }}"><span class="glyphicon glyphicon glyphicon-remove"></span></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-        <ul class="list-group">
-            {% for hall in halls %}
-                <li class="list-group-item">{{ hall.name }}</li>
-            {% endfor %}
-        </ul>
 
     {% else %}
         <b>Keine Sääle eingetragen</b>

@@ -4,10 +4,12 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MovieType extends AbstractType
@@ -30,6 +32,7 @@ class MovieType extends AbstractType
             ])
             ->add('duration', IntegerType::class)
             ->add('description', TextareaType::class)
+            ->add('image', FileType::class)
             ->add('overtime')
             ->add('is3d')
             ->add('sneak')

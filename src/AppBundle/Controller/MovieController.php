@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Movie;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 class MovieController extends Controller
@@ -37,6 +39,19 @@ class MovieController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $image */
+            $image = $movie->getImage();
+            $date = new \DateTime();
+            $fileName = $date->getTimestamp().'.'.$image->guessExtension();
+
+            $image->move(
+                'movieImages',
+                $fileName
+            );
+
+            $movie->setImage($fileName);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($movie);
             $em->flush();
@@ -49,5 +64,36 @@ class MovieController extends Controller
         return $this->render('admin/movie/create.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/admin/movie/remove", name="movie_remove")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function remove(Request $request)
+    {
+        $id = $request->query->get('id');
+
+        if(!is_numeric($id)){
+            throw $this->createNotFoundException('Expect an Integer-ID');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $movie = $em->getRepository('AppBundle:Movie')->findOneBy(array(
+            'id' => $id
+        ));
+
+        if($movie){
+            $em->remove($movie);
+            $em->flush();
+        }
+
+        $this->addFlash('success', 'Film '.$movie->getName().' gelöscht!');
+
+        return $this->redirectToRoute('movie_index',array(
+
+        ));
     }
 }

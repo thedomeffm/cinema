@@ -1,28 +1,68 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
+    <h2 class="text-center">Spielplan</h2>
+    <hr>
 
-{#
-    <div class="col-md-4">
-        <div class="row">
-            <div class="col-md-4"></div> <!-- this column empty -->
-            <div class="col-md-4"> 1 </div>
-            <div class="col-md-4"> 2 </div>
+    <span class="h3 p2">Ihr aktuelles Filmprogramm vom {{ "last Thursday"|date('d.m.Y') }} bis {{ "next Thursday"|date('d.m.Y') }}</span>
+    {% for movie in movies %}
+        <div class="shadow-hover">
+            <div class="row p1 m1">
+                <div class="col-xs-3">
+                    <img class="movieImage" src="{{ asset('/movieImages/'~movie.image) }}"/>
+                </div>
+                <div class="col-xs-9">
+
+                    <img class="pull-right fskImage" src="
+                    {% if movie.ageRating == "0" %}
+                        {{ asset('fsk-logo/fsk0.svg.png') }}
+                    {% elseif movie.ageRating == "6" %}
+                        {{ asset('fsk-logo/fsk6.png') }}
+                    {% elseif movie.ageRating == "12" %}
+                        {{ asset('fsk-logo/fsk12.svg.png') }}
+                    {% elseif movie.ageRating == "16" %}
+                        {{ asset('fsk-logo/fsk16.png') }}
+                    {% else %}
+                        {{ asset('fsk-logo/fsk18.svg.png') }}
+                    {% endif %}
+                    "/>
+                    <h2 class="">{{ movie.name }}</h2>
+
+                    <div class="table-responsive">
+                     <span>
+                        <strong>L&auml;nge: </strong>{{ movie.duration }} Min. &emsp;
+                        <strong>3D: </strong>{% if movie.is3d %} ja {% else %} nein {% endif %}&emsp;
+                    </span>
+                    </div>
+                    <br>
+                    <ul class="list-style-type-none m0 p0 showTable">
+                        <li class="pull-left">Donnerstag</li>
+                        <li class="pull-left">Freitag</li>
+                        <li class="pull-left">Samstag</li>
+                        <li class="pull-left">Sonntag</li>
+                        <li class="pull-left">Montag</li>
+                        <li class="pull-left">Dienstag</li>
+                        <li class="">Mittwoch</li>
+
+                        <br>
+                        {% for day in movie.cinemaShows %}
+                            <ul class="pull-left list-style-type-none m0 p0 showField">
+                                {% if day is empty %}
+                                    &nbsp; {# placeholder for empty fields #}
+                                {% endif %}
+
+                                {% for entry in day %}
+                                    <li class="p0">{{ entry.date|date('H:i') }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
+    {% endfor %}
 
-    <div class="col-md-8">
-        <div class="row">
-            <div class="col-md-2"> 3 </div>
-            <div class="col-md-2"> 4 </div>
-            <div class="col-md-2"> 5 </div>
-            <div class="col-md-2"> 6 </div>
-            <div class="col-md-2"> 7 </div>
-            <div class="col-md-2"></div> <!-- this column empty -->
-        </div>
-    </div>
-#}
-
+    {# Dome variant
     {% for movie in movies %}
         <h2>{{ movie.name }}</h2>
         <div class="row">
@@ -152,5 +192,6 @@
         </div>
         <hr>
     {% endfor %}
+    #}
 
 {% endblock %}
