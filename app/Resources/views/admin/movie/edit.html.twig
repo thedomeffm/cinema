@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block crumbs %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('admin_index') }}">Administration</a></li>
+        <li><a href="{{ path('movie_index') }}">Filme</a></li>
+        <li class="active">Bearbeiten</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Film bearbeiten<small class="pull-right"><a class="btn btn-default btn-block" href="{{ path('movie_index') }}">Abbrechen</a></small></h1>
+    </div>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-success pull-right">Speichern</button>
+    {{ form_end(form) }}
+{% endblock %}

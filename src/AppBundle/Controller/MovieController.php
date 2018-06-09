@@ -42,15 +42,19 @@ class MovieController extends Controller
 
             /** @var UploadedFile $image */
             $image = $movie->getImage();
-            $date = new \DateTime();
-            $fileName = $date->getTimestamp().'.'.$image->guessExtension();
+            if($image){
+                $date = new \DateTime();
+                $fileName = $date->getTimestamp().'.'.$image->guessExtension();
 
-            $image->move(
-                'movieImages',
-                $fileName
-            );
+                $image->move(
+                    'movieImages',
+                    $fileName
+                );
 
-            $movie->setImage($fileName);
+                $movie->setImage($fileName);
+            }else{
+                $movie->setImage('default.jpeg');
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($movie);
@@ -94,6 +98,39 @@ class MovieController extends Controller
 
         return $this->redirectToRoute('movie_index',array(
 
+        ));
+    }
+
+    /**
+     * @Route("/admin/movie/edit", name="movie_edit")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function edit(Request $request)
+    {
+        $id = $request->query->get('id');
+
+        if(!is_numeric($id)){
+            throw $this->createNotFoundException('Expected an Integer-ID');
+        }
+
+        $movie = $this->getDoctrine()->getRepository('AppBundle:Movie')->find($id);
+        $form = $this->createForm('AppBundle\Form\MovieEditType', $movie);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($movie);
+            $em->flush();
+
+            $this->addFlash('success', 'Film '. $movie->getName(). ' bearbeitet.');
+            return $this->redirectToRoute('movie_index', array());
+        }
+
+        return $this->render(':admin/movie:edit.html.twig', array(
+            'form' => $form->createView(),
         ));
     }
 }

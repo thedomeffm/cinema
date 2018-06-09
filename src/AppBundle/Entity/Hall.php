@@ -29,6 +29,22 @@ class Hall
      */
     private $name;
 
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numberOfSeats_Normal", type="integer", length=255, unique=false)
+     */
+    private $numberOfSeats_Normal;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numberOfSeats_Handicapped", type="integer", length=255, unique=false)
+     */
+    private $numberOfSeats_Handicapped;
+
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\CinemaShow", mappedBy="hall")
      */
@@ -37,6 +53,48 @@ class Hall
     public function __construct()
     {
         $this->cinemaShows = new ArrayCollection();
+    }
+
+    /**
+     * Get numberOfSeats_Normal
+     *
+     * @return int
+     */
+    public function getNumberOfSeatsNormal()
+    {
+        return $this->numberOfSeats_Normal;
+    }
+
+    /**
+     * Set numberOfSeats_Normal
+     * @param integer $numberOfSeats_Normal
+     * @return Hall
+     */
+    public function setNumberOfSeatsNormal($numberOfSeats_Normal)
+    {
+        $this->numberOfSeats_Normal = $numberOfSeats_Normal;
+        return $this;
+    }
+
+    /**
+     * Get numberOfSeats_Handicapped
+     *
+     * @return int
+     */
+    public function getNumberOfSeatsHandicapped()
+    {
+        return $this->numberOfSeats_Handicapped;
+    }
+
+    /**
+     * Set numberOfSeats_Handicapped
+     * @param integer $numberOfSeats_Handicapped
+     * @return Hall
+     */
+    public function setNumberOfSeatsHandicapped($numberOfSeats_Handicapped)
+    {
+        $this->numberOfSeats_Handicapped = $numberOfSeats_Handicapped;
+        return $this;
     }
 
     /**
@@ -74,7 +132,7 @@ class Hall
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getCinemaShows()
     {
@@ -82,10 +140,11 @@ class Hall
     }
 
     /**
-     * @param mixed $cinemaShows
+     * @param CinemaShow $cinemaShow
      */
-    public function setCinemaShows($cinemaShows)
+    public function setCinemaShows(CinemaShow $cinemaShow)
     {
-        $this->cinemaShows = $cinemaShows;
+        $this->cinemaShows->add($cinemaShow);
+        $cinemaShow->getReservation()->add($this);
     }
 }

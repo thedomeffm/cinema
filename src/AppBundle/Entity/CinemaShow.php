@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +41,17 @@ class CinemaShow
 
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="cinemaShow")
+     */
+    private $reservation;
+
+    public function __construct()
+    {
+        $this->reservation = new ArrayCollection();
+    }
+
+
+    /**
      * Get id.
      *
      * @return int
@@ -48,6 +60,27 @@ class CinemaShow
     {
         return $this->id;
     }
+
+    /**
+     * Get reservation
+     *
+     * @return ArrayCollection
+     */
+    public function getReservation(){
+        return $this->reservation;
+    }
+
+    /**
+     * Set reservation
+     * @param Reservation reservation
+     */
+    public function setReservation(Reservation $reservation)
+    {
+        $this->reservation->add($reservation);
+        $reservation->add($this);
+    }
+
+
 
     /**
      * Set date.
@@ -74,7 +107,7 @@ class CinemaShow
     }
 
     /**
-     * @return mixed
+     * @return Movie
      */
     public function getMovie()
     {
@@ -82,15 +115,15 @@ class CinemaShow
     }
 
     /**
-     * @param mixed $movie
+     * @param Movie $movie
      */
-    public function setMovie($movie)
+    public function setMovie(Movie$movie)
     {
         $this->movie = $movie;
     }
 
     /**
-     * @return mixed
+     * @return Hall
      */
     public function getHall()
     {

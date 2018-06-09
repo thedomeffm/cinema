@@ -2,11 +2,12 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CinemaType extends AbstractType
+class ReservationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -14,17 +15,16 @@ class CinemaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('basePrice')
-            ->add('overtimePrice')
-            ->add('is3dPrice')
+            ->add('numberOfSeatsNormal', IntegerType::class, array())
+            ->add('numberOfSeatsHandicapped', IntegerType::class, array())
         ;
     }/**
-     * {@inheritdoc}
-     */
+ * {@inheritdoc}
+ */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Cinema'
+            'data_class' => 'AppBundle\Entity\Reservation'
         ));
     }
 
@@ -33,7 +33,7 @@ class CinemaType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_cinema';
+        return 'appbundle_reservation';
     }
 
 

@@ -18,7 +18,7 @@ class PersonType extends AbstractType
             ->add('lastname', TextType::class)
             ->add('mail', EmailType::class)
             ->add('mailText', TextareaType::class, array(
-                "mapped" => false,
+                    "mapped" => false,
             ))
         ;
     }

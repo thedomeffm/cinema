@@ -42,13 +42,6 @@ class Cinema
      */
     private $is3dPrice;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="sneak_price", type="float")
-     */
-    private $sneakPrice;
-
 
     /**
      * Get id.
@@ -130,29 +123,5 @@ class Cinema
     public function getIs3dPrice()
     {
         return $this->is3dPrice;
-    }
-
-    /**
-     * Set sneakPrice.
-     *
-     * @param float $sneakPrice
-     *
-     * @return Cinema
-     */
-    public function setSneakPrice($sneakPrice)
-    {
-        $this->sneakPrice = $sneakPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get sneakPrice.
-     *
-     * @return float
-     */
-    public function getSneakPrice()
-    {
-        return $this->sneakPrice;
     }
 }

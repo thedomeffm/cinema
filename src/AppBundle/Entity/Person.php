@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +43,16 @@ class Person
      */
     private $mail;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Reservation", mappedBy="person")
+     */
+    private $reservation;
+
+
+    public function __construct()
+    {
+        $this->reservation = new ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -52,6 +63,29 @@ class Person
     {
         return $this->id;
     }
+
+    /**
+     * Get reservation
+     *
+     * @return ArrayCollection
+     */
+    public function getReservation()
+    {
+        return $this->reservation;
+    }
+
+    /**
+     * Set reservation
+     *
+     * @param Reservation $reservation
+     */
+    public function setReservation(Reservation $reservation)
+    {
+        $this->reservation->add($reservation);
+        $reservation->getReservation()->add($this);
+    }
+
+
 
     /**
      * Set firstname.

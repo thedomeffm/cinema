@@ -7,12 +7,11 @@
     <span class="h3 p2">Ihr aktuelles Filmprogramm vom {{ "last Thursday"|date('d.m.Y') }} bis {{ "next Thursday"|date('d.m.Y') }}</span>
     {% for movie in movies %}
         <div class="shadow-hover">
-            <div class="row p1 m1">
-                <div class="col-xs-3">
+            <div class="row p1 cinemaShow">
+                <div class="col-xs-3 col-md-3 col-lg-2">
                     <img class="movieImage" src="{{ asset('/movieImages/'~movie.image) }}"/>
                 </div>
-                <div class="col-xs-9">
-
+                <div class="col-xs-9 col-md-9 col-lg-10">
                     <img class="pull-right fskImage" src="
                     {% if movie.ageRating == "0" %}
                         {{ asset('fsk-logo/fsk0.svg.png') }}
@@ -29,12 +28,14 @@
                     <h2 class="">{{ movie.name }}</h2>
 
                     <div class="table-responsive">
-                     <span>
-                        <strong>L&auml;nge: </strong>{{ movie.duration }} Min. &emsp;
-                        <strong>3D: </strong>{% if movie.is3d %} ja {% else %} nein {% endif %}&emsp;
-                    </span>
+                         <span>
+                            <strong>L&auml;nge: </strong>{{ movie.duration }} Min. &emsp;
+                            <strong class="test">3D: </strong>{% if movie.is3d %} ja {% else %} nein {% endif %}&emsp;
+                        </span>
                     </div>
                     <br>
+                </div>
+                <div class="col-xs-12 col-md-9 col-lg-10 timetable">
                     <ul class="list-style-type-none m0 p0 showTable">
                         <li class="pull-left">Donnerstag</li>
                         <li class="pull-left">Freitag</li>
@@ -52,7 +53,7 @@
                                 {% endif %}
 
                                 {% for entry in day %}
-                                    <li class="p0">{{ entry.date|date('H:i') }}</li>
+                                    <a href="{{ path('book', {'id': entry.id}) }}"><li class="p0">{{ entry.date|date('H:i') }}</li></a>
                                 {% endfor %}
                             </ul>
                         {% endfor %}
@@ -61,137 +62,4 @@
             </div>
         </div>
     {% endfor %}
-
-    {# Dome variant
-    {% for movie in movies %}
-        <h2>{{ movie.name }}</h2>
-        <div class="row">
-            <div class="col-sm-2">
-                <strong>L&auml;nge: </strong>{{ movie.duration }} Min.<br>
-                <strong>3D: </strong>{% if movie.is3d %} ja {% else %} nein {% endif %}&emsp;<br>
-                <strong>Altersfreigabe: </strong>{{ movie.ageRating }}<br>
-            </div>
-            <div class="col-sm-10">
-                <p>{{ movie.description }}</p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-1">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Donnerstag</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in movie.cinemaShows.donnerstag %}
-                            <tr>
-                                <td>{{ entry.date|date('d.m H:i') }} Uhr</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-1">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Freitag</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in movie.cinemaShows.freitag %}
-                            <tr>
-                                <td>{{ entry.date|date('d.m H:i') }} Uhr</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-1">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Samstag</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in movie.cinemaShows.samstag %}
-                            <tr>
-                                <td>{{ entry.date|date('d.m H:i') }} Uhr</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-1">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Sonntag</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in movie.cinemaShows.sonntag %}
-                            <tr>
-                                <td>{{ entry.date|date('d.m H:i') }} Uhr</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-1">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Montag</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in movie.cinemaShows.montag %}
-                            <tr>
-                                <td>{{ entry.date|date('d.m H:i') }} Uhr</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-1">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Dienstag</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in movie.cinemaShows.dienstag %}
-                            <tr>
-                                <td>{{ entry.date|date('d.m H:i') }} Uhr</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-1">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Mittwoch</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in movie.cinemaShows.mittwoch %}
-                            <tr>
-                                <td>{{ entry.date|date('d.m H:i') }} Uhr</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <hr>
-    {% endfor %}
-    #}
-
 {% endblock %}

@@ -66,19 +66,26 @@ class Movie
     private $is3d;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="sneak", type="boolean")
-     */
-    private $sneak;
-
-    /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=false)
      *
      * @Assert\NotBlank(message="Bitte geben Sie eine Bildatei an.")
      * @Assert\File(mimeTypes={ "image/jpeg" })
      */
     private $image;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="float", nullable=false)
+     */
+    private $normalPrice;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="float", nullable=false)
+     */
+    private $handicappedPrice;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\CinemaShow", mappedBy="movie")
@@ -245,30 +252,6 @@ class Movie
     }
 
     /**
-     * Set sneak.
-     *
-     * @param bool $sneak
-     *
-     * @return Movie
-     */
-    public function setSneak($sneak)
-    {
-        $this->sneak = $sneak;
-
-        return $this;
-    }
-
-    /**
-     * Get sneak.
-     *
-     * @return bool
-     */
-    public function getSneak()
-    {
-        return $this->sneak;
-    }
-
-    /**
      * @return mixed
      */
     public function getImage()
@@ -302,5 +285,45 @@ class Movie
     {
         $this->cinemaShows->add($cinemaShow);
         $cinemaShow->setMovie($this);
+    }
+
+    /**
+     * Get normalPrice
+     *
+     * @return float
+     */
+    public function getNormalPrice()
+    {
+        return $this->normalPrice;
+    }
+
+    /**
+     * Set normalPrice
+     *
+     * @param float $normalPrice
+     */
+    public function setNormalPrice($normalPrice)
+    {
+        $this->normalPrice = $normalPrice;
+    }
+
+    /**
+     * get handicappedPrice
+     *
+     * @return float
+     */
+    public function getHandicappedPrice()
+    {
+        return $this->handicappedPrice;
+    }
+
+    /**
+     * set handicappedPrice
+     *
+     * @param float $handicappedPrice
+     */
+    public function setHandicappedPrice($handicappedPrice)
+    {
+        $this->handicappedPrice = $handicappedPrice;
     }
 }

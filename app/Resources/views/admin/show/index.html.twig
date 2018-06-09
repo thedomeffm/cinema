@@ -36,6 +36,7 @@
                         <td>{{ show.movie.name }}</td>
                         <td>{{ show.hall.name }}</td>
                         <td>{{ show.date|date('d.m.Y H:i') }}</td>
+                        <td class=""><a href="{{ path('show_edit', {'id': show.id}) }}"><span class="glyphicon glyphicon glyphicon-pencil"></span></a></td>
                         <td class=""><a href="{{ path('show_remove', {'id': show.id}) }}"><span class="glyphicon glyphicon glyphicon-remove"></span></a></td>
                     </tr>
                 {% endfor %}

@@ -24,12 +24,19 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Sitzpl&auml;tze<br>Normal</th>
+                    <th>Sitzpl&auml;tze<br>Rollstuhlfahrer</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {% for hall in halls %}
                     <tr>
                         <td>{{ hall.name }}</td>
+                        <td>{{ hall.numberOfSeatsNormal }}</td>
+                        <td>{{ hall.numberOfSeatsHandicapped }}</td>
+                        <td><a href="{{ path('hall_edit', {'id': hall.id}) }}"><span class="glyphicon glyphicon glyphicon-pencil"></span> </a></td>
                         <td class=""><a href="{{ path('hall_remove', {'id': hall.id}) }}"><span class="glyphicon glyphicon glyphicon-remove"></span></a></td>
                     </tr>
                 {% endfor %}

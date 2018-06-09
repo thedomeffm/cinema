@@ -147,6 +147,10 @@ hr {
     padding: 20px;
 }
 
+.mt1{
+    margin-top: 10px;
+}
+
 .m1{
     margin: 10px;
 }
@@ -177,10 +181,18 @@ hr {
     margin-top: 25px;
 }
 
-.shadow-hover:hover>div{
-    box-shadow: 1px 1px 15px var(--shadow-color);
-}
-
 .movieImage{
     width: 150px;
+}
+
+@media(max-width: 992px){
+    .timetable{
+        margin-top: 10px;
+    }
+}
+
+.cinemaShow{
+    box-shadow: 1px 1px 15px var(--shadow-color);
+    margin-top: 30px;
+    margin-bottom: 30px;
 }

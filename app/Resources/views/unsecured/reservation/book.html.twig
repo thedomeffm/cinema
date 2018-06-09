@@ -1,0 +1,77 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1 class="text-center">Buchung</h1>
+    <hr>
+    <div class="row">
+        <div class="col-xs-3">
+            <img class="movieImage" src="{{ asset('/movieImages/'~show.movie.image) }}"/>
+        </div>
+
+        <div class="col-xs-9">
+            <h2></h2>
+            <h3><strong>{{ show.movie.name }}:</strong> {{ show.date|date('d.m.Y i:H') }} Uhr</h3>
+            <ul>
+                <li id="normalPrice">Normalpreis: {{ normalprice  }}</li>
+                <li id="handicappedPrice">Erm&auml;&szlig;igt: {{ handicappedPrice }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row mt1">
+        <table class="table">
+        {{ form_start(formReservation) }}
+            <tbody>
+                <tr>
+                    <td>Normale Sitzpl&auml;tze</td>
+                    <td>noch {{ seatsNormal }} Plätze frei</td>
+                    <td>{{ form(formReservation.numberOfSeatsNormal,{
+                            'attr': {
+                                'class': 'priceFields text-right',
+                                'id': 'normalPriceField',
+                                'value': 0,
+                            }
+                        }) }}</td>
+                </tr>
+                <tr>
+                    <td>Rollstuhlpl&auml;tze</td>
+                    <td>Noch {{ seatsHandicapped }} Plätze frei</td>
+                    <td>{{ form(formReservation.numberOfSeatsHandicapped,{
+                            'attr': {
+                                'class': 'priceFields text-right',
+                                'id': 'handicappedPriceField',
+                                'value': 0,
+                            }
+                        }) }}</td>
+                </tr>
+            <tr>
+                <td colspan="2">Gesamt:</td>
+                <td id="result" class="pull-right">0, 00 &euro;</td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="button" data-toggle="modal" data-target="#modalBookPerson" class="btn btn-success pull-right">Weiter</button>
+        {{ form_end(formReservation) }}
+    </div>
+
+
+    <div id="modalBookPerson" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+        {{ form_start(formPerson) }}
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title pull-left" id="bookPersonTitle">Impressum</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="p1 line-height-xs">
+                    {{ form_widget(formPerson) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" data-dismiss="modal">Reservieren</button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(formPerson) }}
+    </div>
+{% endblock %}

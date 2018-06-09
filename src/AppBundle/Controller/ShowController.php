@@ -81,4 +81,37 @@ class ShowController extends Controller
 
         ));
     }
+
+    /**
+     * @Route("/admin/show/edit", name="show_edit")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function edit(Request $request)
+    {
+        $id = $request->query->get('id');
+
+        if(!is_numeric($id)){
+            throw $this->createNotFoundException('Expected an Integer-ID');
+        }
+
+        $show = $this->getDoctrine()->getRepository('AppBundle:CinemaShow')->find($id);
+        $form = $this->createForm('AppBundle\Form\CinemaShowType', $show);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($show);
+            $em->flush();
+
+            $this->addFlash('success', 'Vorstellung '. $show->getName(). ' bearbeitet.');
+            return $this->redirectToRoute('show_index', array());
+        }
+
+        return $this->render(':admin/show:edit.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 }
