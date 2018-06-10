@@ -16,9 +16,15 @@ class HallType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('numberOfSeats_Normal', IntegerType::class)
-            ->add('numberOfSeats_Handicapped', IntegerType::class)
+            ->add('name', TextType::class, [
+                'label' => 'Saalname',
+            ])
+            ->add('numberOfSeats_Normal', IntegerType::class, [
+                'label' => 'Anzahl Sitzplätze',
+            ])
+            ->add('numberOfSeats_Handicapped', IntegerType::class, [
+                'label' => 'Anzahl Behinderten Sitzplätze',
+            ])
 
         ;
     }/**

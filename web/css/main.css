@@ -6,7 +6,7 @@
     --color1: #FFE9D7;
     --color2: #e0d0bc;
     --color3: #bbab9a;
-    --color4: #765b48;
+    --color4: #9e9b95;
 
     --white: #FFFFFF;
     --black: #4b4b4b;
@@ -35,6 +35,7 @@ hr {
 
 .main {
     margin-top: 65px;
+    min-height: 70vh;
 }
 
 .page-header {
@@ -68,7 +69,7 @@ hr {
 }
 
 .card {
-    min-height: 55px;
+    min-height: 95px;
     background-color: var(--color4);
     padding: 15px;
     color: #ffffff;

@@ -10,28 +10,21 @@
 
     <h1>Administration</h1>
     <div class="row">
-        <div class="col-md-3">
-            <a href="{{ path('cinema_settings') }}">
-                <div class="card">
-                    Grundeinstellung
-                </div>
-            </a>
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <a href="{{ path('hall_index') }}">
             <div class="card">
                 Kinosaal
             </div>
             </a>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <a href="{{ path('movie_index') }}">
             <div class="card">
                 Filme
             </div>
             </a>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <a href="{{ path('show_index') }}">
             <div class="card">
                 Vorstellungen
@@ -39,83 +32,5 @@
             </a>
         </div>
     </div>
-
-    <hr>
-
-    <h2>Vorschau nächste Woche</h2>
-    {# Info: Same twig as on the 'homepage' #}
-
-    {% for movie in movies %}
-        <div class="table-responsive">
-            <h2>{{ movie.name }}</h2>
-            <span>
-                    <strong>L&auml;nge: </strong>{{ movie.duration }} Min.
-                    <strong>3D: </strong>{% if movie.is3d %} ja {% else %} nein {% endif %}&emsp;
-                    <strong>Altersfreigabe: </strong>{{ movie.ageRating }}
-                </span>
-            <table class="table indexTable" id="myTable">
-                <thead>
-                <tr>
-                    <th>Donnerstag</th>
-                    <th>Freitag</th>
-                    <th>Samstag</th>
-                    <th>Sonntag</th>
-                    <th>Montag</th>
-                    <th>Dienstag</th>
-                    <th>Mittwoch</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for show in movie.cinemaShows %}
-                    <tr>
-                        <td>
-                            {% if date(show.date)|date('l') == "yesterday"|date('l') %}
-                                {{ show.date|date("H:i") }}
-                            {% endif %}
-                        </td>
-
-                        <td>
-                            {% if date(show.date)|date('l') == "yesterday"|date_modify("+1 day")|date('l') %}
-                                {{ show.date|date("H:i") }}
-                            {% endif %}
-                        </td>
-
-                        <td>
-                            {% if date(show.date)|date('l') == "yesterday"|date_modify("+2 day")|date('l') %}
-                                {{ show.date|date("H:i") }}
-                            {% endif %}
-                        </td>
-
-                        <td>
-                            {% if date(show.date)|date('l') == "yesterday"|date_modify("+3 day")|date('l') %}
-                                {{ show.date|date("H:i") }}
-                            {% endif %}
-                        </td>
-
-                        <td>
-                            {% if date(show.date)|date('l') == "yesterday"|date_modify("+4 day")|date('l') %}
-                                {{ show.date|date("H:i") }}
-                            {% endif %}
-                        </td>
-
-                        <td>
-                            {% if date(show.date)|date('l') == "yesterday"|date_modify("+5 day")|date('l') %}
-                                {{ show.date|date("H:i") }}
-                            {% endif %}
-                        </td>
-
-                        <td>
-                            {% if date(show.date)|date('l') == "yesterday"|date_modify("+6 day")|date('l') %}
-                                {{ show.date|date("H:i") }}
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <p>{{ movie.description }}</p>
-        <hr>
-    {% endfor %}
 
 {% endblock %}

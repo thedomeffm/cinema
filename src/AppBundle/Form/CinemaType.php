@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,9 +15,15 @@ class CinemaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('basePrice')
-            ->add('overtimePrice')
-            ->add('is3dPrice')
+            ->add('basePrice', MoneyType::class, [
+                'label' => 'Grundpreis',
+            ])
+            ->add('overtimePrice', MoneyType::class, [
+                'label' => 'Aufschlag für Überlänge',
+            ])
+            ->add('is3dPrice', MoneyType::class, [
+                'label' => 'Aufschlag für 3D',
+            ])
         ;
     }/**
      * {@inheritdoc}

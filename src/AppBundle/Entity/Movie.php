@@ -81,13 +81,6 @@ class Movie
     private $normalPrice;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(type="float", nullable=false)
-     */
-    private $handicappedPrice;
-
-    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\CinemaShow", mappedBy="movie")
      */
     private $cinemaShows;
@@ -305,25 +298,5 @@ class Movie
     public function setNormalPrice($normalPrice)
     {
         $this->normalPrice = $normalPrice;
-    }
-
-    /**
-     * get handicappedPrice
-     *
-     * @return float
-     */
-    public function getHandicappedPrice()
-    {
-        return $this->handicappedPrice;
-    }
-
-    /**
-     * set handicappedPrice
-     *
-     * @param float $handicappedPrice
-     */
-    public function setHandicappedPrice($handicappedPrice)
-    {
-        $this->handicappedPrice = $handicappedPrice;
     }
 }

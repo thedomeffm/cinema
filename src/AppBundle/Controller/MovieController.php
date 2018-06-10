@@ -42,7 +42,7 @@ class MovieController extends Controller
 
             /** @var UploadedFile $image */
             $image = $movie->getImage();
-            if($image){
+            if ($image){
                 $date = new \DateTime();
                 $fileName = $date->getTimestamp().'.'.$image->guessExtension();
 
@@ -52,7 +52,7 @@ class MovieController extends Controller
                 );
 
                 $movie->setImage($fileName);
-            }else{
+            } else {
                 $movie->setImage('default.jpeg');
             }
 
@@ -116,7 +116,8 @@ class MovieController extends Controller
         }
 
         $movie = $this->getDoctrine()->getRepository('AppBundle:Movie')->find($id);
-        $form = $this->createForm('AppBundle\Form\MovieEditType', $movie);
+        $options = ['edit_form' => true];
+        $form = $this->createForm('AppBundle\Form\MovieType', $movie, $options);
 
         $form->handleRequest($request);
 

@@ -31,6 +31,7 @@
                          <span>
                             <strong>L&auml;nge: </strong>{{ movie.duration }} Min. &emsp;
                             <strong class="test">3D: </strong>{% if movie.is3d %} ja {% else %} nein {% endif %}&emsp;
+                            <strong class="test">Preis: </strong>{% if movie.normalPrice %} {{ movie.normalPrice|number_format(2, ',', '.') }} € {% else %} ? {% endif %}&emsp;
                         </span>
                     </div>
                     <br>
@@ -53,7 +54,7 @@
                                 {% endif %}
 
                                 {% for entry in day %}
-                                    <a href="{{ path('book', {'id': entry.id}) }}"><li class="p0">{{ entry.date|date('H:i') }}</li></a>
+                                    <li class="p0">{{ entry.date|date('H:i') }}</li>
                                 {% endfor %}
                             </ul>
                         {% endfor %}
