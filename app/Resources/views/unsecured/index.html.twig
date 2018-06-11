@@ -61,18 +61,26 @@
                     </ul>
                 </div>
                 <br>
-                <div class="col-xs-12 col-md-12 col-lg-12 mt1">
-                    {% spaceless %}
-                        {{- movie.description|slice(0,300) -}}
-                        {% if movie.description|length > 300 %}
-                            <div class="collapse" id="collapse{{ movie.id }}">
-                                {{- movie.description|slice(300, movie.description|length) }}
+                <div class="col-xs-3 col-md-3 col-lg-2 mt1">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#{{ movie.id }}">
+                        Beschreibung
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="{{ movie.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">{{ movie.name }}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    {{ movie.description }}
+                                </div>
                             </div>
-                            <a class="link"  data-toggle="collapse" data-target="#collapse{{ movie.id }}" aria-expanded="false" aria-controls="collapse{{ movie.id }}">
-                                weiter lesen...
-                            </a>
-                        {% endif %}
-                    {% endspaceless %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
