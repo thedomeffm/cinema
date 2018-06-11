@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MovieType extends AbstractType
@@ -61,7 +60,13 @@ class MovieType extends AbstractType
         if (!$options['edit_form']) {
             $builder
                 ->add('image', FileType::class, [
-                'required' => false,
+                    'required' => false,
+                ]);
+        } else {
+            $builder
+                ->add('image', TextType::class, [
+                    'required' => false,
+                    'disabled' => true,
                 ]);
         }
     }

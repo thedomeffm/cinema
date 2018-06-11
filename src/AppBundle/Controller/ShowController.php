@@ -106,7 +106,7 @@ class ShowController extends Controller
             $em->persist($show);
             $em->flush();
 
-            $this->addFlash('success', 'Vorstellung '. $show->getName(). ' bearbeitet.');
+            $this->addFlash('success', 'Vorstellung '. $show->getMovie()->getName(). ' bearbeitet.');
             return $this->redirectToRoute('show_index', array());
         }
 

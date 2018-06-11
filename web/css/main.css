@@ -197,3 +197,15 @@ hr {
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+.collapsing{
+    display: inline;
+}
+
+.collapse.in{
+    display: inline;
+}
+
+.link:hover{
+    cursor: pointer;
+}

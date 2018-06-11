@@ -14,11 +14,18 @@ class PersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('mail', EmailType::class)
+            ->add('firstname', TextType::class,array(
+                'label' => 'Vorname'
+            ))
+            ->add('lastname', TextType::class, array(
+                'label' => 'Nachname'
+            ))
+            ->add('mail', EmailType::class, array(
+                'label' => 'E-Mail Adresse'
+            ))
             ->add('mailText', TextareaType::class, array(
-                    "mapped" => false,
+                'mapped' => false,
+                'label' => 'Ihre Nachricht',
             ))
         ;
     }

@@ -29,7 +29,7 @@
             {% for movie in movies %}
                 <tr>
                     <td>{{ movie.name }}</td>
-                    <td>{{ movie.description }}</td>
+                    <td>{{ movie.description|slice(0,100) }}...</td>
                     <td>{{ movie.ageRating }} J.</td>
                     <td>{{ movie.duration }}</td>
                     <td>{% if movie.is3d %}JA{% else %}Nein{% endif %}</td>

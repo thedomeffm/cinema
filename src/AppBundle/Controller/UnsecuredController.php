@@ -2,10 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\CinemaShow;
-use Doctrine\Common\Util\Debug;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\Movie;
 use AppBundle\Entity\Person;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -75,18 +72,6 @@ class UnsecuredController extends Controller
         $form = $this->createForm('AppBundle\Form\PersonType', $person);
 
         $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($person);
-            $em->flush();
-
-            //Send Mail Message
-
-            return $this->redirectToRoute('contact', array(
-                "message" => $person->getFirstname(). " ". $person->getLastname(). " erfolgreich gespeichert.",
-            ));
-        }
 
         return $this->render('unsecured/contact.html.twig', [
             "form" => $form->createView(),

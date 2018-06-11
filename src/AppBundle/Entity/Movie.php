@@ -47,7 +47,7 @@ class Movie
     /**
      * @var string|null
      *
-     * @ORM\Column(name="description", type="string", length=1000, nullable=true)
+     * @ORM\Column(name="description", type="string", length=2000, nullable=true)
      */
     private $description;
 

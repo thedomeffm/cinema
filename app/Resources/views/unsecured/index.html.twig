@@ -60,6 +60,20 @@
                         {% endfor %}
                     </ul>
                 </div>
+                <br>
+                <div class="col-xs-12 col-md-12 col-lg-12 mt1">
+                    {% spaceless %}
+                        {{- movie.description|slice(0,300) -}}
+                        {% if movie.description|length > 300 %}
+                            <div class="collapse" id="collapse{{ movie.id }}">
+                                {{- movie.description|slice(300, movie.description|length) }}
+                            </div>
+                            <a class="link"  data-toggle="collapse" data-target="#collapse{{ movie.id }}" aria-expanded="false" aria-controls="collapse{{ movie.id }}">
+                                weiter lesen...
+                            </a>
+                        {% endif %}
+                    {% endspaceless %}
+                </div>
             </div>
         </div>
     {% endfor %}
