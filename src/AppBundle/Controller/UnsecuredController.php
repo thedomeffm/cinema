@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Person;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -68,14 +71,35 @@ class UnsecuredController extends Controller
     {
         $message = $request->get("message");
 
-        $person = new Person();
-        $form = $this->createForm('AppBundle\Form\PersonType', $person);
+        $form = $this->createFormBuilder()
+            ->add('firstname', TextType::class,array(
+                'label' => 'Vorname'
+            ))
+            ->add('lastname', TextType::class, array(
+                'label' => 'Nachname'
+            ))
+            ->add('mail', EmailType::class, array(
+                'label' => 'E-Mail Adresse'
+            ))
+            ->add('mailText', TextareaType::class, array(
+                'label' => 'Ihre Nachricht',
+            ))
+            ->getForm()
+        ;
+
 
         $form->handleRequest($request);
 
+        if($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $this->sendMailAction($data, $this->getMailer());
+
+            $this->addFlash('success', 'Nachricht versendet!');
+            $this->redirectToRoute('contact');
+        }
+
         return $this->render('unsecured/contact.html.twig', [
             "form" => $form->createView(),
-            "message" => $message
         ]);
     }
 
@@ -89,5 +113,53 @@ class UnsecuredController extends Controller
         return $this->render('unsecured/approach.html.twig', array(
 
         ));
+    }
+
+    /**
+     * @param $data
+     * @param \Swift_Mailer $mailer
+     */
+    public function sendMailAction($data, \Swift_Mailer $mailer)
+    {
+        //get the recipient
+        $mail = 'matthias.feyll@reservix.de';
+        //create the subject here
+        $subject = 'Anfrage Kontaktformular: ' . $mail . ' | Kinomaxx';
+        //Create Message
+        $message = new \Swift_Message();
+
+        //combine everything
+        $message
+            ->setSubject($subject)
+            ->setFrom('reservix.blackboard@gmail.com')
+            ->setTo($mail)
+            ->setReplyTo('matthias.feyll@reservix.de')
+            ->setBody(
+                $this->renderView(
+                    ':mails:contactForm.html.twig',
+                    [
+                        'mail' => $mail,
+                        'data' => $data,
+                    ]
+                ),
+                'text/html'
+            );
+
+
+        try {
+            $mailer->send($message);
+        } catch (\Swift_TransportException $e) {
+            sleep(3);
+            $mailer->send($message);
+        }
+        return;
+    }
+
+    /**
+     * @return object|\Swift_Mailer
+     */
+    private function getMailer()
+    {
+        return $this->container->get('mailer');
     }
 }
