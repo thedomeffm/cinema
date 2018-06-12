@@ -89,6 +89,4 @@ class MovieType extends AbstractType
     {
         return 'appbundle_movie';
     }
-
-
 }

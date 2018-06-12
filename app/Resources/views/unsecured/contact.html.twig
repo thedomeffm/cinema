@@ -5,16 +5,6 @@
         <h1 class="text-center underline">Kontakt</h1>
     </div>
     <hr>
-
-    {% if message is defined and message is not empty %}
-        <div class="container">
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        </div>
-    {% endif %}
-
-
     <div class="container">
         {{ form_start(form) }}
         {{ form_widget(form) }}

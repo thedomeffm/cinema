@@ -37,5 +37,8 @@ monolog:
         #    type: chromephp
         #    level: info
 
-#swiftmailer:
-#    delivery_addresses: ['me@example.com']
+swiftmailer:
+    delivery_addresses: ['matthias.feyll@reservix.de']
+    transport: gmail
+    username: reservix.blackboard@gmail.com
+    password: cvbnhjkl789
